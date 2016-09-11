@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Other
+namespace SupplementalAssembly
 {
 	public class ExternalObject 
 	{

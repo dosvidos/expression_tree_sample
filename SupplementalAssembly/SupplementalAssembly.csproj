@@ -8,8 +8,8 @@
     <ProjectGuid>{7D69FCBB-98FB-420E-BADC-623EF6D7D874}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Other</RootNamespace>
-    <AssemblyName>Other</AssemblyName>
+    <RootNamespace>SupplementalAssembly</RootNamespace>
+    <AssemblyName>SupplementalAssembly</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -70,12 +70,6 @@
   <ItemGroup>
     <Compile Include="ExternalObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExpTree\ExpTree.csproj">
-      <Project>{7ED09426-F4D2-4C17-A681-D84493017954}</Project>
-      <Name>ExpTree</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
