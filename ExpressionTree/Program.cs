@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace ExpTree
+namespace ExpressionTree
 {
     class Program
     {

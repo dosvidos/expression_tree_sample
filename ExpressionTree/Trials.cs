@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 
-namespace ExpTree
+namespace ExpressionTree
 {
     public class Trials
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExpTree
+namespace ExpressionTree
 {
     class LocalObject
     {
