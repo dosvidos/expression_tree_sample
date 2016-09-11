@@ -13,7 +13,7 @@ namespace ExpTree
         private readonly Action<LocalObject, Int32> _setter;
         private readonly Func<Object, Int32> _dynamicGetter;
         private readonly Action<Object, Int32> _dynamicSetter;
-        private readonly Type _SupplementalAssemblyType;
+        private readonly Type _externalType;
 
 
         public Trials()
@@ -37,16 +37,16 @@ namespace ExpTree
 
 
             //Since we does not known the real type, we cannot use effectively the expression tree technique.
-            _SupplementalAssemblyType = typeof(SupplementalAssembly.ExternalObject);
+            _externalType = Type.GetType("SupplementalAssembly.ExternalObject, SupplementalAssembly", true);
             param = Expression.Parameter(typeof(Object), "param");
-            getPropertyValueExp = Expression.Lambda(Expression.Property(Expression.Convert(param, _SupplementalAssemblyType), "Prop"), param);
+            getPropertyValueExp = Expression.Lambda(Expression.Property(Expression.Convert(param, _externalType), "Prop"), param);
             var dynamicGetterExpression = (Expression<Func<Object, Int32>>)getPropertyValueExp;
             _dynamicGetter = dynamicGetterExpression.Compile();
 
             paramo = Expression.Parameter(typeof(Object), "param");
             parami = Expression.Parameter(typeof(Int32), "newvalue");
-            var setterMethodInfo = _SupplementalAssemblyType.GetProperty("Prop", BindingFlags.Public | BindingFlags.Instance).GetSetMethod();
-            methodCallSetterOfProperty = Expression.Call(Expression.Convert(paramo, _SupplementalAssemblyType), setterMethodInfo, parami);
+            var setterMethodInfo = _externalType.GetProperty("Prop", BindingFlags.Public | BindingFlags.Instance).GetSetMethod();
+            methodCallSetterOfProperty = Expression.Call(Expression.Convert(paramo, _externalType), setterMethodInfo, parami);
             setPropertyValueExp = Expression.Lambda(methodCallSetterOfProperty, paramo, parami);
             _dynamicSetter = ((Expression<Action<object, int>>)setPropertyValueExp).Compile();
         }
@@ -85,7 +85,7 @@ namespace ExpTree
         [Benchmark]
         public void SetPropertyWithExpressionForUnknownObject()
         {
-            var externalObject = Activator.CreateInstance(_SupplementalAssemblyType);
+            var externalObject = Activator.CreateInstance(_externalType);
             for (var I = 0; I < _iterations; ++I)
             {
                 Int32 actualValue = _dynamicGetter(externalObject);
